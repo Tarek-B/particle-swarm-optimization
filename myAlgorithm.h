@@ -25,13 +25,14 @@
 		bool operator== (const Problem& pbm) const;
 		bool operator!= (const Problem& pbm) const;
 
-		Direction direction () const; //Maximize or Minimize
+		//Direction direction () const; //Maximize or Minimize (effacée par le prof)
 		int dimension() const;		
 		double LowerLimit, UpperLimit;
 
 	private:
 
 		int _dimension;
+	  	int _numf; // le num d'une fonction (rosenbrock etc. )
   };
 //=======================================================================
 class Solution
@@ -53,6 +54,10 @@ class Solution
 		
 		void initialize();
 		double fitness();
+	
+		switch (pbm._numf)
+			case 1 : Rosenbrock
+			};
 		double get_fitness();
 		
 		unsigned int size() const;
