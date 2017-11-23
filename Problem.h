@@ -1,3 +1,5 @@
+#ifndef PROBLEM_H
+#define PROBLEM_H
  class Problem
   {
 	public:
@@ -12,7 +14,7 @@
 		bool operator!= (const Problem& pbm) const;
 
 		//Direction direction () const; //Maximize or Minimize (effacée par le prof)
-		int dimension() const;		
+		int dimension() const;
 		double LowerLimit, UpperLimit;
 
 	private:
@@ -20,3 +22,5 @@
 		int _dimension;
 	  	int _numf; // le num d'une fonction (rosenbrock etc. )
   };
+
+  #endif
