@@ -1,12 +1,12 @@
  class SetUpParams
   {
-  	//ici vous devez mettre quelques paramÃ¨tres tels que :
+  	//ici vous devez mettre quelques paramètres tels que :
   	
 	private:
-		unsigned int   _independent_runs;         //number of independent runs
-		unsigned int   _nb_evolution_steps;       // number of iterations per run
-		unsigned int   _population_size;		// number of solutions in the population
-		unsigned int   _solution_size;	        // size of each particle
+		unsigned int   d_independent_runs;         //number of independent runs
+		unsigned int   d_nb_evolution_steps;       // number of iterations per run
+		unsigned int   d_population_size;		// number of solutions in the population
+		unsigned int   d_solution_size;	        // size of each particle
 
 	public:
 		SetUpParams ();
@@ -25,3 +25,4 @@
 
 		~SetUpParams();
   };
+  
