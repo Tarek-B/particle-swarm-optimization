@@ -3,4 +3,6 @@ Uni AI project
 
 Esra : SetUpParams  
 
-Lydia : Solution
+Lydia : Solution  
+
+Tarek : Problem
