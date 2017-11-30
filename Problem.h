@@ -1,5 +1,7 @@
 #ifndef PROBLEM_H
 #define PROBLEM_H
+#include "Benchmarks.h"
+#include <iostream>
  class Problem
   {
 	public:
