@@ -15,7 +15,7 @@
 		friend istream& operator>> (istream& is, SetUpParams& setup);
 
 		const unsigned int   independent_runs() const;
-		const unsigned int   nb_evolution_steps() const;
+		const unsigned int   nb_evolution_steps() const; 
 		const unsigned int   population_size() const;
 		const unsigned int   solution_size() const;
 		void independent_runs(const unsigned int val);

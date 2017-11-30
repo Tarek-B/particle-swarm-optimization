@@ -4,7 +4,7 @@
 /** Builder
 	
 */
-SetUpParams::SetUpParams ():  d_independent_runs{64}, d_nb_evolution_steps{30}, d_population_size{30}, d_solution_size {30}
+SetUpParams::SetUpParams ():  d_independent_runs{30}, d_nb_evolution_steps{2e6/30}, d_population_size{30}, d_solution_size {30}
 {}
 /** Destructive 
 
@@ -69,10 +69,10 @@ void solution_size(const unsigned int val)
 }
 
 
-/** Operateur de Sortie
-	@param[in, out] is - le flux de sortie
-	@param[in] setup - les parametres du probleme
-	@return is - le flux de sortie
+/** output Operator
+	@param[in, out] is - the output stream
+	@param[in] setup - the parameters of the problem
+	@return is - the output stream
 
 
 */
@@ -83,10 +83,10 @@ std::ostream& operator<< (std::ostream& os, const SetUpParams& setup)
 	os<<"Nb of solution in Population"<< setup.population_size()<< std::endl;
 	return os;
 }
-/** Operateur d'Entree
-	@param[in, out] is - le flux d'entree
-	@param[in] setup - les parametres du probleme
-	@return is - le flux d'entree
+/** input operator 
+	@param[in, out] is - The input stram 
+	@param[in] setup - the parameters of the problem
+	@return is - the input stream
 
 */
 std::istream& operator>> (std::istream& is, SetUpParams& setup)
