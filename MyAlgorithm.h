@@ -1,14 +1,38 @@
+#include <iostream>
+#include <vector>
+#include "Solution.h"
+#include "Problem.h"
+#include "SetUpParams.h"
+
+#define MYALGORITHM_H
+#ifndef MYALGORITHM_H
+
+/*
+	Class representing our program
+**/
+
 class MyAlgorithm
   {
 	private:
-		vector<Solution*> _solutions;     // individuals in population
-		vector<struct particle> _fitness_values;
-		const SetUpParams& _setup;
-		unsigned int _upper_cost,_lower_cost; // lower and upper fitness of individuals in population
- 
+		// individuals in population
+		vector<Solution*> d_solutions;   
+		// A problem
+		const Problem& d_pbm;
+		// Parameters
+		const SetUpParams& d_setup;
+		// Upper fitness of individuals in population
+		unsigned int d_upper_cost; 
+ 		//d_lower_cost; lower fitness of individuals in population
+ 		//vector<struct particle> _fitness_values;
 	public:
-		MyAlgorithm(const Problem& pbm,const SetUpParams& setup); 
-		~MyAlgorithm();
+		/*
+		  Constructor with a problem and parameters
+		**/
+			MyAlgorithm(const Problem& pbm,const SetUpParams& setup); 	 //c'est fait 
+		/*
+		  Destructor
+		**/
+			~MyAlgorithm();		//c'est fait 
 
 		friend ostream& operator<< (ostream& os, const MyAlgorithm& myAlgo);
 		friend istream& operator>> (istream& is, MyAlgorithm& myAlgo);
@@ -34,4 +58,7 @@ class MyAlgorithm
 		 
 		void evolution(int iter); /*makes an evolution step*/
 
-  };
+};
+  
+  
+#endif
