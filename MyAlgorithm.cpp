@@ -82,9 +82,9 @@ unsigned int MyAlgorithm::upper_cost() const
   int position;
   for(int i=0;i<d_solutions.size();i++)
   { 
-      if(max<d_solutions[i]) 
+      if(max<d_solutions[i]->get_fitness()) 
       {
-        max = d_solutions[i];
+        max = d_solutions[i]->get_fitness();
         position = i;
       }
 	return d_solutions[position]->get_fitness();
@@ -99,9 +99,9 @@ unsigned int MyAlgorithm::upper_cost() const
   int position;
   for(int i=0;i<d_solutions.size();i++)
   { 
-      if(min<d_solutions[i]) 
+      if(min<d_solutions[i]->get_fitness()) 
       {
-        min = d_solutions[i];
+        min = d_solutions[i]->get_fitness();
         position = i;
       }
 	return d_solutions[position]->get_fitness();
