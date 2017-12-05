@@ -40,7 +40,7 @@ class Solution
 	//contient la déclaration d'une solution
 	public:
 		Solution (const Problem& pbm); //Done
-		Solution (const Solution& sol);
+		Solution (const Solution& sol); //Done
 		~Solution();
 
  		friend ostream& operator<< (ostream& os, const Solution& sol);
