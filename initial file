@@ -39,7 +39,7 @@ class Solution
   {
 	//contient la déclaration d'une solution
 	public:
-		Solution (const Problem& pbm);
+		Solution (const Problem& pbm); //Done
 		Solution (const Solution& sol);
 		~Solution();
 
