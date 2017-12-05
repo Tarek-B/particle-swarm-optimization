@@ -7,7 +7,7 @@
 
 /**************************************************************Paramètres***********************************
    
-    vector<Solution*> d_solutions;
+    		vector<Solution*> d_solutions;
 		// Parameters
 		const SetUpParams& d_setup;
 		// Upper fitness of individuals in population
@@ -115,26 +115,38 @@ Solution& MyAlgorithm::solution(const unsigned int index) const
 	return *d_solutions[index];
 }
   
-/********Je sais pas ce qu'elle fait mais
+
+
+    
+	  
+	  
+  void evolution(int iter); /*makes an evolution step*/
+  {
+    
+  }  
+    
+	
+	/************************************
+Je sais pas ce qu'elle fait mais
 je suppose qu'elle va retournée le vecteur 
-de solution********************************/
+de solution
 
 vector<struct particle>&  MyAlgorithm::fitness_values();
   {
     reurn _fitness_values
   }
   
-/*******Pareil que celle d'en haut je suppose
+Pareil que celle d'en haut je suppose
 qu'elle retourne une valeur à la position index
-de _fitness_values*****************************/
+de _fitness_values
   
 double fitness(const unsigned int index) const
 {
   return _fitness_values[index];
 }
 
-/************Retourne la meilleure
-valeur du _fitness_values*********/
+Retourne la meilleure
+valeur du _fitness_values
 double MyAlgorithm::best_cost() const;
   {
     floa max=std::numeric_limits<float>::min();
@@ -150,7 +162,9 @@ double MyAlgorithm::best_cost() const;
   }
   
   
-  
+  	  
+	  
+	  
 double MyAlgorithm::worst_cost() const;
   {
     floa min=std::numeric_limits<float>::max();
@@ -163,10 +177,9 @@ double MyAlgorithm::worst_cost() const;
            position = i;
       }
 	   return _fitness_values[position].fitness;
-  }
-    
-    
-    
+  }	  
+	  
+	  
 Solution& MyAlgorithm::best_solution() const;
   {
     
@@ -180,9 +193,6 @@ Solution& MyAlgorithm::worst_solution() const;
   }
 
   
+  ******************************/
   
-  
-void evolution(int iter); /*makes an evolution step*/
-  {
-    
-  }
+
