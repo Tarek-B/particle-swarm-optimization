@@ -20,11 +20,35 @@ class Solution{
 	  Constructor par recopie
 	**/
 		Solution (const Solution& sol);
-	/* 
-	  Destructor
-	**/
-		~Solution();
+
 	
+	//getters
+	/*
+	@ return the coordinates of the current position of a particle
+	**/
+	vector<double>& get_pCurrent()const;
+	
+	/*
+	@return the coordinates of the best position of a particle  
+	**/
+	vector<double>& get_pBest()const;
+	
+	/*
+	@return the coordinates of the velocity of a particle
+	**/
+	vector<double>& get_Velocity()const;
+	
+	/*
+	@ return the fitness of a particle
+	**/
+	double get_fitness()const;
+	
+	/*
+	@ return a problem 
+	**/
+	const Problem& get_problem() const;
+	
+	//Initialization
 	/*
 	  Generate reel random
 	  @param min 
@@ -46,6 +70,10 @@ class Solution{
 	**/
 		void initializeBestPosition();
 		
+	/*
+	@calculate the fitness of a particle 
+	**/
+	double fitness(); 
   private:
    		 //Vector of the coordinates of the current position
     vector<double> d_pCurrent;
@@ -54,7 +82,7 @@ class Solution{
     	//Vector of the coordinates of the current velocity
     vector<double> d_Velocity;
    		 //Fitness of a particul
-    double d_current_fitness;
+    double d_currentFitness;
     	//Un probleme donne (par rapport aux six fonctions de tests donnees dans le pdf)
     const Problem& d_pbm;
 };

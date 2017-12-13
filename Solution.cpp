@@ -15,6 +15,44 @@ Solution :: Solution(const Problem& pbm) :
 }
 
 /*
+	Constructeur par recopie
+**/
+Solution :: Solution fitness(const Solution& sol) : 
+	d_pCurrent{sol.get_pCurrent()}, 
+	d_pBest{sol.get_pBest()}, 
+	d_Velocity{sol.get_Velocity()}, 
+	d_currentFitness{sol.get_fitness()}, 
+	d_pbm{sol.get_problem()}
+	
+{}
+
+// Getters
+
+vector<double>& Solution :: get_pCurrent()const
+{
+	return d_pCurrent;
+}
+
+vector<double>& Solution :: get_pBest()const
+{
+	return d_pBest;
+}
+
+vector<double>& Solution :: get_Velocity()const
+{
+	return d_Velocity;
+}
+
+double Solution :: get_fitness()const
+{
+	return d_currentFitness;
+}
+
+const Problem& Solution :: get_problem() const
+{
+	return d_pbm;
+}
+/*
 	Méthode generant un reel aleatoire
 **/
 double Solution :: randomDouble(double min, double max)
@@ -54,4 +92,11 @@ void Solution ::initializeBestPosition()
 		d_pbest[i]= d_pCurrent[i];	//Initialiser sa meilleure position comme étant sa position initiale
 	}
 
+}
+
+double Solution :: fitness()
+{
+	switch(d_pbm.getNumFonction())
+		case 1:
+			d_pbm.getBench()->
 }
