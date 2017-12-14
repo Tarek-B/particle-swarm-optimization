@@ -24,6 +24,10 @@ class Problem
 		double Problem::Rosenbrock(/* X HELP!*/);
 		double Problem::Rastrigin(/* X HELP!*/);
 		double Problem::Ackley(/* X HELP!*/);
+	
+		double Schwefel(vector<double>& argument);
+		double Schaffer(vector<double>& argument);
+		double Weierstrass(vector<double>& argument);
 		// le significat des arguments x1,...,Xn pour calculer le fitness?
 		double calculateFitness(int functionNumber/* needed for the switch case, therefore (1 -> 6)*/);
 	
@@ -107,6 +111,58 @@ double Problem::Ackley(/* X HELP!*/)
 
 
 	return (fitness);
+}
+
+double Problem :: Schwefel(vector<double>& argument)
+{
+	double fitness = 0.0;
+
+	fitness = 418.9829 * NombreDeVariables();
+
+	for(int i = 0 ; i < NombreDeVariables() ; i++)
+	{
+		fitness -= argument[i] * sin(sqrt(fabs(argument[i])));
+	}
+
+	return(fitness);
+}
+
+double Problem :: Schaffer(vector<double>& argument)
+{
+	double fitness = 0.0;
+
+	for(int i = 0; i<NombreDeVariables()-1;i++)
+	{
+		fitness += 0.5 + (pow(sin(sqrt(pow(argument[i],2)+pow(argument[i+1],2))),2)+0.5)/pow((1+0.001*(pow(argument[i],2)+pow(argument[i+1],2))),2);
+	}
+
+	return(fitness);
+}
+
+double Problem :: Weierstrass(vector<double>& argument)
+{
+	double fitness = 0.0;
+	double premierMembre = 0.0;
+	double secondMembre = 0.0;
+
+	for(int i=0;i<NombreDeVariables();i++)
+	{
+		for(int j = 0; j<=20;j++)
+		{
+			premierMembre+=pow(0.5,j)*cos(2*pi*pow(3,j)*(argument[i]+0.5));
+		}
+	}
+
+	for(int i=0;i<=20;i++)
+	{
+		secondMembre+=pow(0.5,i)*cos(2*pi*pow(3,i)*0.5);
+	}
+
+	secondMembre*=NombreDeVariables();
+
+	fitness = premierMembre - secondMembre;
+	return(fitness);
+
 }
   #endif
 
