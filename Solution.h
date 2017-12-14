@@ -82,7 +82,7 @@ class Solution{
 	/*
 	@calculate the new velocity of a particle
 	**/
-	void newVelocity();
+	void newVelocity(const vector<double>& gBest);
   private:
    		 //Vector of the coordinates of the current position
     vector<double> d_pCurrent;
