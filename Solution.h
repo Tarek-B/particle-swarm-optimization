@@ -74,6 +74,15 @@ class Solution{
 	@calculate the fitness of a particle 
 	**/
 	double fitness(); 
+	
+	/*
+	@calculate the new position of a particle
+	**/
+	void newPosition();
+	/*
+	@calculate the new velocity of a particle
+	**/
+	void newVelocity();
   private:
    		 //Vector of the coordinates of the current position
     vector<double> d_pCurrent;
