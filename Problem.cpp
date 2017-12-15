@@ -1,47 +1,75 @@
 #include "Problem.h"
 
-using std::cout;
-using std::endl;
-
-
-Problem::Problem(benchmark* bench) : d_bench{bench}
-{}
-
-Problem::~Problem()
+Problem :: Problem(int dimension, int numF) : d_dimension{dimension} , d_numf{numF} 
 {
-	delete d_bench;
+	switch(d_numf)
+		case 1:
+			d_lowerLimit = -2.048;
+			d_upperLimit = 2.048;
+		case 2:
+			d_lowerLimit = -5.12;
+			d_upperLimit = 5.12;
+		case 3:
+			d_lowerLimit = -5;
+			d_upperLimit = 5;
+		case 4:
+			d_lowerLimit = -500;
+			d_upperLimit = 500;
+		case 5:
+			d_lowerLimit = -100;
+			d_upperLimit = 100;
+		case 6:
+			d_lowerLimit = -2;
+			d_upperLimit =  2;
 }
 
-int Problem::dimension() const{
-	return d_bench->getNombreDeVariables();
-}
-
-double Problem::UpperLimit(int index) const
+int Problem :: getDimension() const
 {
-	return d_bench->getBorneSuperieure(index);
+	return d_dimension;
 }
 
-double Problem::LowerLimit(int index) const
-{	#pragma once
-	return d_bench->getBorneInferieure(index);
-}
-
-benchmark* Problem::getBenchmark() const
+double Problem :: getLowerLimit()const
 {
-	return d_bench;
+	return d_lowerLimit;
 }
 
-std::ostream& operator<<(std::ostream& ost, const Problem& pbm){
-	ost<<"Problem"<<endl;
-	ost<<"-> Dimension : "<<pbm.dimension()<<endl;
-	ost<<"-> Limits (";
-	for(int i=0;i<pbm.dimension();i++)
-	{
-		ost<<pbm.LowerLimit(i)<<" ";
-	}
-	ost<<",";
-	for(int i=0;i<pbm.dimension();i++)
-	{
-		ost<<pbm.UpperLimit(i)<<" ";
-	}
+double Problem :: getUpperLimit()const
+{
+	return d_upperLimit;
 }
+
+double problem :: getNumFunction()const
+{
+	get d_numf;
+}
+void Problem :: setNumFonction(int numF)
+{
+	d_numf = numF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

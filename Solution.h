@@ -39,10 +39,14 @@ class Solution{
 	vector<double>& get_Velocity()const;
 	
 	/*
-	@ return the fitness of a particle
+	@ return the fitness of the position of a particle
 	**/
-	double get_fitness()const;
+	double get_currentFitness()const;
 	
+	/*
+	@ return the fitness of the best position of a particle
+	**/
+	double get_BestFitness()const;
 	/*
 	@ return a problem 
 	**/
@@ -71,18 +75,14 @@ class Solution{
 		void initializeBestPosition();
 		
 	/*
-	@calculate the fitness of a particle 
+	@calculate the current fitness of a particle 
 	**/
-	double fitness(); 
+	double currentFitness(); 
 	
 	/*
-	@calculate the new position of a particle
+	@calculate the fitness oh the best position of a particle
 	**/
-	void newPosition();
-	/*
-	@calculate the new velocity of a particle
-	**/
-	void newVelocity(const vector<double>& gBest);
+	double bestFitness();
   private:
    		 //Vector of the coordinates of the current position
     vector<double> d_pCurrent;
@@ -90,8 +90,10 @@ class Solution{
     vector<double> d_pbest;
     	//Vector of the coordinates of the current velocity
     vector<double> d_Velocity;
-   		 //Fitness of a particul
+   		 //Fitness of a position a particul
     double d_currentFitness;
+       		 //Fitness of the best position of a particul
+    double d_bestFitness;
     	//Un probleme donne (par rapport aux six fonctions de tests donnees dans le pdf)
     const Problem& d_pbm;
 };
