@@ -58,10 +58,20 @@ const SetUpParams& MyAlgorithm::setup() const
 	return *d_setup;
 }
 
+
+//Initialisation de la population
+void MyAlgorithme::initialize()
+{
+	for(int i = 0; i < d_solution.size(); i++)
+	{
+		d_solution[i].initializePosition();	
+	}
+}
+
 // creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
 void MyAlgorithm::evaluate()
  {
-    //?????
+   
  }
 
 
