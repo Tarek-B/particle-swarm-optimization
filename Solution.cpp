@@ -62,37 +62,20 @@ double Solution :: randomDouble(double min, double max)
 
 /*
 	Initialiser la position aleatoirement
+	initialise la meilleur position à la position initiale
+	Initialise la vitesse
 **/
 void Solution :: initializePosition()
 {
 	for(int i=0; i<d_pCurrent.size(); i++)
 	{
 		d_pCurrent[i]=randomDouble(d_pbm.LowerLimit(), d_pbm.UpperLimit());
-	}
-}
-
-/*
-	Initialiser la vitesse aleatoirement
-**/
-void Solution :: initializeVelocity()
-{
-	for(int i=0; i<d_Velocity.size(); i++)
-	{
+		d_pbest[i]= d_pCurrent[i];	//Initialiser sa meilleure position comme étant sa position initiale
 		d_Velocity[i]=randomDouble(d_pbm.LowerLimit(), d_pbm.UpperLimit());
 	}
 }
 
-/*
-	Initialiser la meilleure position
-**/
-void Solution ::initializeBestPosition()
-{
-	for(int i=0; i<d_pbest.size(); i++)
-	{
-		d_pbest[i]= d_pCurrent[i];	//Initialiser sa meilleure position comme étant sa position initiale
-	}
 
-}
 
 double Solution :: fitness()
 {
