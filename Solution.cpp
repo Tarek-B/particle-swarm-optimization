@@ -57,6 +57,11 @@ const Problem& Solution :: get_problem() const
 {
 	return d_pbm;
 }
+
+int Solution :: size()const
+{
+	return d_pbm.getDimension();
+}
 /*
 	Méthode generant un reel aleatoire
 **/
@@ -99,6 +104,12 @@ void Solution ::initializeBestPosition()
 
 }
 
+void Solution :: initialize()
+{
+	initializePosition();
+	initializeBestPosition();
+	initializeVelocity();
+}
 /*
 	Calculate the fitness of the current position of a particle
 **/
@@ -187,4 +198,20 @@ double Solution :: bestFitness()
 				secondMembre*=d_pBest.size();
 			}
 			d_currentFitness = premierMembre - secondMembre;	
+}
+
+void Solution :: newPosition()
+{
+	for(int i=0; i<d_pCurrent.size(); i++)
+		d_pCurrent[i] += d_Velocity[i];
+}
+
+void Solution :: newVelocity(const vector<double>& gBest)
+{
+	double r1=randomDouble(0,1);
+	double r2=randomDouble(0,1);
+	double c1=1.4;
+	double c2=1.4;
+	for(int i=0; i<d_Velocity.size(); i++)
+		d_Velocity[i] += c1*r1*(d_pBest[i]-d_pCurrent[i])+c2*r2*(gBest[i]-d_pCurrent[i]);
 }

@@ -47,6 +47,11 @@ class Solution{
 	@ return the fitness of the best position of a particle
 	**/
 	double get_BestFitness()const;
+		
+	/*
+	@Return the size
+	**/
+	int size()const;
 	/*
 	@ return a problem 
 	**/
@@ -73,7 +78,11 @@ class Solution{
 	  Initialize the coordinates of the best position of a particle  
 	**/
 		void initializeBestPosition();
-		
+	
+	/*
+		Initialize all the coordinates
+	**/
+		void initialize();
 	/*
 	@calculate the current fitness of a particle 
 	**/
@@ -83,6 +92,16 @@ class Solution{
 	@calculate the fitness oh the best position of a particle
 	**/
 	double bestFitness();
+	
+	/*
+	@calculate the new position 
+	**/
+	void newPosition();
+
+	/*
+	@calculate the new velocity 
+	**/
+	void newVelocity(const vector<double>& gBest);
   private:
    		 //Vector of the coordinates of the current position
     vector<double> d_pCurrent;
