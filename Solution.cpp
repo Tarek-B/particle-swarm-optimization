@@ -119,10 +119,12 @@ double Solution :: currentFitness()
 		case 1: //Rosenbrock
 			for(int i=0; i<d_pCurrent.size()-1; i++)
 				d_currentFitness += 100 * pow(d_pCurrent[i+1] - pow(d_pCurrent[i],2) , 2) + pow(1-d_pCurrent[i],2);
+			return d_currentFitness;
 		case 2: //Rastrigin
 			for(int i=0; i<d_pCurrent.size(); i++)
 				d_currentFitness += pow(d_pCurrent[i],2)- 10* cos(2*pi*d_pCurrent[i]);
 			d_currentFitness *= 10*d_p^Current.size();
+			return d_currentFitness;
 		case 3:	//Ackley	
 			double firstMember = 0.0;
 			double secondMember = 0.0;
@@ -132,15 +134,18 @@ double Solution :: currentFitness()
 				secondMember += cos(2*pi*d_pCurrent[i]);
 			}
 			d_currentFitness = -20 * exp(-0.2*sqrt((1.0/d_pCurrent.size()*firstMember)) - exp((1.0/d_pCurrent.size())*secondMember) + 20 + exp(1);
+			return d_currentFitness;
 		case 4: //Schwefel
 			d_currentFitness = 418.9829* d_pCurrent.size();
 			for(int i=0; i<d_pCurrent.size(); i++)
 			{
 				d_currentFitness -= d_pCurrent[i] * sin(sqrt(fabs(d_pCurrent[i])))
 			}
+			return d_currentFitness;
 		case 5:	//Schaffer
 			for(int i=0; i<d_pCurrent.size(); i++)
 				d_currentFitness += 0.5 + (pow(sin(sqrt(pow(d_pCurrent[i],2)+pow(d_pCurrent[i+1],2))),2)+0.5)/pow((1+0.001*(pow(d_pCurrent[i],2)+pow(d_pCurrent[i+1],2))),2);
+			return d_currentFitness;
 		case 6:	//Weierstrass
 			double premierMembre = 0.0;
 			double secondMembre = 0.0;
@@ -153,6 +158,7 @@ double Solution :: currentFitness()
 				secondMembre*=d_pCurrent.size();
 			}
 			d_currentFitness = premierMembre - secondMembre;	
+			return d_currentFitness;
 }
 
 /*
@@ -163,11 +169,13 @@ double Solution :: bestFitness()
 	switch(d_pbm.getNumFunction())
 		case 1: //Rosenbrock
 			for(int i=0; i<d_pBest.size()-1; i++)
-				d_currentFitness += 100 * pow(d_pBest[i+1] - pow(d_pBest[i],2) , 2) + pow(1-d_pBest[i],2);
+				d_bestFitness += 100 * pow(d_pBest[i+1] - pow(d_pBest[i],2) , 2) + pow(1-d_pBest[i],2);
+			return d_bestFitness;
 		case 2: //Rastrigin
 			for(int i=0; i<d_pBest.size(); i++)
 				d_currentFitness += pow(d_pBest[i],2)- 10* cos(2*pi*d_pBest[i]);
-			d_currentFitness *= 10*d_pBest.size();
+			d_bestFitness *= 10*d_pBest.size();
+			return d_bestFitness;
 		case 3:	//Ackley	
 			double firstMember = 0.0;
 			double secondMember = 0.0;
@@ -176,16 +184,19 @@ double Solution :: bestFitness()
 				firstMember += pow(d_pBest[i],2);
 				secondMember += cos(2*pi*d_pBest[i]);
 			}
-			d_currentFitness = -20 * exp(-0.2*sqrt((1.0/d_pBest.size()*firstMember)) - exp((1.0/d_pBest.size())*secondMember) + 20 + exp(1);
+			d_bestFitness = -20 * exp(-0.2*sqrt((1.0/d_pBest.size()*firstMember)) - exp((1.0/d_pBest.size())*secondMember) + 20 + exp(1);
+			return d_bestFitness;
 		case 4: //Schwefel
 			d_currentFitness = 418.9829* d_pBest.size();
 			for(int i=0; i<d_pBest.size(); i++)
 			{
-				d_currentFitness -= d_pBest[i] * sin(sqrt(fabs(d_pBest[i])))
+				d_bestFitness -= d_pBest[i] * sin(sqrt(fabs(d_pBest[i])))
 			}
+			return d_bestFitness;
 		case 5:	//Schaffer
 			for(int i=0; i<d_pBest.size(); i++)
-				d_currentFitness += 0.5 + (pow(sin(sqrt(pow(d_pBest[i],2)+pow(d_pBest[i+1],2))),2)+0.5)/pow((1+0.001*(pow(d_pBest[i],2)+pow(d_pBest[i+1],2))),2);
+				d_bestFitness += 0.5 + (pow(sin(sqrt(pow(d_pBest[i],2)+pow(d_pBest[i+1],2))),2)+0.5)/pow((1+0.001*(pow(d_pBest[i],2)+pow(d_pBest[i+1],2))),2);
+			return d_bestFitness;
 		case 6:	//Weierstrass
 			double premierMembre = 0.0;
 			double secondMembre = 0.0;
@@ -197,7 +208,8 @@ double Solution :: bestFitness()
 					secondMembre+=pow(0.5,i)*cos(2*pi*pow(3,i)*0.5);
 				secondMembre*=d_pBest.size();
 			}
-			d_currentFitness = premierMembre - secondMembre;	
+			d_bestFitness = premierMembre - secondMembre;
+			return d_bestFitness;	
 }
 
 void Solution :: newPosition()
@@ -214,4 +226,12 @@ void Solution :: newVelocity(const vector<double>& gBest)
 	double c2=1.4;
 	for(int i=0; i<d_Velocity.size(); i++)
 		d_Velocity[i] += c1*r1*(d_pBest[i]-d_pCurrent[i])+c2*r2*(gBest[i]-d_pCurrent[i]);
+}
+
+void Solution :: updateBestPosition()
+{
+	for(int i=0; i<d_pbest.size(); i++)
+	{
+		d_pbest[i]= d_pCurrent[i];	
+	}
 }

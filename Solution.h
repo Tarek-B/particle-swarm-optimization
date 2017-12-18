@@ -102,6 +102,11 @@ class Solution{
 	@calculate the new velocity 
 	**/
 	void newVelocity(const vector<double>& gBest);
+	
+	/*
+	@update the coordinates of the best position
+	**/
+	void updateBestPosition();
   private:
    		 //Vector of the coordinates of the current position
     vector<double> d_pCurrent;
