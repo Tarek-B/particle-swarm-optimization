@@ -20,7 +20,7 @@ class MyAlgorithm
 		const SetUpParams& d_setup; //c'est un objet qui contient le nbr_runs nb_evolution_steps population_size solution_size
 		unsigned int d_upper_cost; // Upper fitness of individuals in population
  		unsigned int d_lower_cost; //lower fitness of individuals in population
- 		
+ 		Solution * d_gBest ; 
 	public:
 		
 			MyAlgorithm(const Problem& pbm,const SetUpParams& setup); 	 //c'est fait 
