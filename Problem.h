@@ -1,6 +1,6 @@
 #ifndef PROBLEM_H
 #define PROBLEM_H
-#include "Benchmarks.h"
+
 #include <iostream>
 
 class Problem{
@@ -11,7 +11,7 @@ class Problem{
 		Problem(int dimension, int numF);
 	
 		/*
-			Automatically created but there is no usage og dynamic allocation, therefore
+			Automatically created but there is no usage of dynamic allocation, therefore
 			doesn't need to exist
 		**/
 		~Problem();
@@ -59,7 +59,7 @@ class Problem{
 	  	double d_upperLimit;
 };
 
-
+#endif
 
 
 

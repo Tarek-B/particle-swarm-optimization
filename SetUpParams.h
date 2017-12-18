@@ -1,7 +1,9 @@
- class SetUpParams
-  {
-  	//ici vous devez mettre quelques paramètres tels que :
-  	
+#define SETUPPARAMS_H
+#ifndef SETUPPARAMS_H
+
+
+class SetUpParams
+{  	
 	private:
 		unsigned int   d_independent_runs;         //number of independent runs
 		unsigned int   d_nb_evolution_steps;       // number of iterations per run
@@ -54,5 +56,7 @@
 		void solution_size(const unsigned int val);
 
 		~SetUpParams();
-  };
+};
+
+#endif
   

@@ -104,6 +104,9 @@ void Solution ::initializeBestPosition()
 
 }
 
+/*
+	Initialiser une particule
+**/
 void Solution :: initialize()
 {
 	initializePosition();
@@ -111,7 +114,7 @@ void Solution :: initialize()
 	initializeVelocity();
 }
 /*
-	Calculate the fitness of the current position of a particle
+	Calculer la fitness courante
 **/
 double Solution :: currentFitness()
 {
@@ -162,7 +165,7 @@ double Solution :: currentFitness()
 }
 
 /*
-	Calculate the fitness of the best position of a particle
+	Calculer la meilleure fitness d'une particule
 **/
 double Solution :: bestFitness()
 {
@@ -212,12 +215,18 @@ double Solution :: bestFitness()
 			return d_bestFitness;	
 }
 
+/*
+	Calculer les coordonnées de la nouvelle position
+**/
 void Solution :: newPosition()
 {
 	for(int i=0; i<d_pCurrent.size(); i++)
 		d_pCurrent[i] += d_Velocity[i];
 }
 
+/*
+	Calculer les coordonnées de la vitesse
+**/
 void Solution :: newVelocity(const vector<double>& gBest)
 {
 	double r1=randomDouble(0,1);
@@ -228,6 +237,9 @@ void Solution :: newVelocity(const vector<double>& gBest)
 		d_Velocity[i] += c1*r1*(d_pBest[i]-d_pCurrent[i])+c2*r2*(gBest[i]-d_pCurrent[i]);
 }
 
+/*
+	Mettre à jour les cooordonnées de la meilleure position
+**/
 void Solution :: updateBestPosition()
 {
 	for(int i=0; i<d_pbest.size(); i++)

@@ -101,8 +101,7 @@ std::istream& operator>> (std::istream& is, SetUpParams& setup)
 	{
 		setup.independent_runs(runs);
 		setup.nb_evolution_steps(steps);
-		setup.population_size(population);
-		
+		setup.population_size(population);		
 	}
 	return is;	
 }
