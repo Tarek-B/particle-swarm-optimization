@@ -71,8 +71,47 @@ void MyAlgorithme::initialize()
 // creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
 void MyAlgorithm::evaluate()
  {
-   
+   for (int i=0 ; i<d_solutions.size(); i++) 
+   {
+   	if (d_solutions[i].currentFitness()< d_solutions[i].BestFitness())
+   	{
+   		d_solution[i].updateBestPosition () ; 
+    }
+   }
  }
+ 
+ void MyAlgorithm :: evolution () 
+ {
+ 	int j=0 ; 
+ 	while (j< d_setup->nb_evolution_steps())
+ 	{
+ 		for (int i=0; i<d_solutions.size(); i++)
+ 		{
+ 			d_solutions[i].newVelocity(d_gBest.get_pCurrent()) ; 
+ 			d_solutions[i].newPosition() ; 
+ 			evaluate() ; 
+ 			d_gBest = best_solution() ;  		
+ 		
+		}
+		j++ ; 
+	}
+ 	
+ }
+ 
+ Solution MyAlgorithm :: best_solution() 
+ {
+ 	d_gBest = d_solutions[0] ; 
+ 	for (int i=1 ; i<d_solutions.size() ; i++ )
+ 	{
+ 		if (d_gBest->get_BestFitness() < d_solutions[i].get_BestFitness())
+ 		{
+ 			d_gBest = d_solutions[i] ; 
+		}
+	}
+ }
+ 
+ 
+ 
 
 
 /*********Fonction qui renvoie le tableau des solutions
