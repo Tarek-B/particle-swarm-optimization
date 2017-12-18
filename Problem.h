@@ -21,6 +21,10 @@ class Problem{
 			@ return the dimension of the current problem
 		**/
 		int getDimension() const;
+	
+		/*
+			@ return the lower limit of the current problem
+		**/
 		double getLowerLimit()const;
 	
 		/*
@@ -29,7 +33,7 @@ class Problem{
 		double getUpperLimit()const;
 	
 		/*
-			@ return the lower limit of the current problem
+			@ return the function's (problem) number
 		**/
 		double getNumFunction()const;	
 		
