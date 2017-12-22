@@ -4,7 +4,7 @@
 /** Constructeur
 
 */
-SetUpParams::SetUpParams ():  d_independent_runs{10}, d_nb_evolution_steps{10000}, d_population_size{30}, d_solution_size{30}
+SetUpParams::SetUpParams ():  d_independent_runs{30}, d_nb_evolution_steps{66667}, d_population_size{30}, d_solution_size{30}
 {
 
 }
