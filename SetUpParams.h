@@ -49,6 +49,8 @@ class SetUpParams{
 		void population_size( int val);
 
 		void solution_size( int val);
+	
+		std::ostream& operator<< (std::ostream& os, const SetUpParams& setup)
 
 	private:
 		 int   d_independent_runs;         //number of independent runs
