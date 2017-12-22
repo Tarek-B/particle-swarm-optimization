@@ -3,20 +3,21 @@
 #include "Solution.h"
 #include "Problem.h"
 #include "SetUpParams.h"
+#include "MyAlgorithm.h"
 #include <limits>
 
 /*
 	Constructor
 **/
-MyAlgorithm::MyAlgorithm(Problem* pbm,const SetUpParams& setup) : //d_pbm{pbm},
-		 d_setup{&setup}, 
-         d_solutions{}, 
-		 d_upper_cost{0},
+MyAlgorithm::MyAlgorithm(const Problem& pbm,const SetUpParams& setup) : d_pbm{&pbm},
+		 d_setup{&setup},
+         d_solutions{},
+		 d_upper_cost{0}
 {
-	for(int i=0;i<d_setup->population_size();i++)
+	for(int i=0;i<d_setup.population_size();i++)
 	{
 		d_solutions.push_back(new Solution{d_pbm});
-	}
+	}int iter
 }
 
 
@@ -31,8 +32,8 @@ MyAlgorithm::~MyAlgorithm()
 	}
 }
 
-/***********Focnction qui renvoie 
-un pointeur vers un objet de 
+/***********Focnction qui renvoie
+un pointeur vers un objet de
 paramètres de la classe SetUpParams
 *************************************/
 
@@ -52,14 +53,14 @@ vector<Solution*>& MyAlgorithm::solutions() const
 /*
 @Return the best solution of the population
 **/
-Solution MyAlgorithm :: best_solution() 
+Solution MyAlgorithm :: best_solution()
 {
- 	d_gBest = d_solutions[0] ; 
+ 	d_gBest = d_solutions[0] ;
  	for (int i=1 ; i<d_solutions.size() ; i++ )
  	{
  		if (d_gBest->get_currentFitness() < d_solutions[i].get_currentFitness())
  		{
- 			d_gBest = d_solutions[i] ; 
+ 			d_gBest = d_solutions[i] ;
 		}
 	}
 }
@@ -80,8 +81,8 @@ unsigned int MyAlgorithm::upper_cost() const
   float max=std::numeric_limits<float>::min();
   int position;
   for(int i=0;i<d_solutions.size();i++)
-  { 
-      if(max<d_solutions[i]->get_fitness()) 
+  {
+      if(max<d_solutions[i]->get_fitness())
       {
         max = d_solutions[i]->get_fitness();
         position = i;
@@ -96,40 +97,39 @@ void MyAlgorithme::initialize()
 {
 	for(int i = 0; i < d_solution.size(); i++)
 	{
-		d_solution[i].initialize();	
+		d_solution[i].initialize();
 	}
 }
 
 // creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
 void MyAlgorithm::evaluate()
  {
-   for (int i=0 ; i<d_solutions.size(); i++) 
+   for (int i=0 ; i<d_solutions.size(); i++)
    {
    	if (d_solutions[i].currentFitness()< d_solutions[i].BestFitness())
    	{
-   		d_solution[i].updateBestPosition () ; 
+   		d_solution[i].updateBestPosition () ;
     }
    }
  }
- 
- void MyAlgorithm :: evolution () 
+
+ void MyAlgorithm :: evolution ()
  {
- 	int j=0 ; 
+ 	int j=0 ;
  	while (j< d_setup->nb_evolution_steps())
  	{
  		for (int i=0; i<d_solutions.size(); i++)
  		{
- 			d_solutions[i].newVelocity(d_gBest.get_pCurrent()) ; 
- 			d_solutions[i].newPosition() ; 
- 			evaluate() ; 
- 			d_gBest = best_solution() ;  		
- 		
+ 			d_solutions[i].newVelocity(d_gBest.get_pCurrent()) ;
+ 			d_solutions[i].newPosition() ;
+ 			evaluate() ;
+ 			d_gBest = best_solution() ;
 		}
-		j++ ; 
+		j++ ;
 	}
- 	
- }
- 
 
-  
+ }
+
+
+
 

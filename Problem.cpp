@@ -1,9 +1,10 @@
 #include "Problem.h"
 
-Problem :: Problem(int dimension, int numF) : d_dimension{dimension} , d_numf{numF} 
+Problem :: Problem(int dimension, int numF) : d_dimension{dimension} , d_numf{numF}
 {
 	switch(d_numf)
-		case 1:
+	{
+        case 1:
 			d_lowerLimit = -2.048;
 			d_upperLimit = 2.048;
 		case 2:
@@ -21,6 +22,8 @@ Problem :: Problem(int dimension, int numF) : d_dimension{dimension} , d_numf{nu
 		case 6:
 			d_lowerLimit = -2;
 			d_upperLimit =  2;
+	}
+
 }
 
 int Problem :: getDimension() const
@@ -38,9 +41,9 @@ double Problem :: getUpperLimit()const
 	return d_upperLimit;
 }
 
-double problem :: getNumFunction()const
+int Problem :: getNumFunction()const
 {
-	get d_numf;
+	return d_numf;
 }
 void Problem :: setNumFonction(int numF)
 {

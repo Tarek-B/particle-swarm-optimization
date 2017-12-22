@@ -9,34 +9,34 @@ class Problem{
 			Constructor with the dimension and the number function
 		**/
 		Problem(int dimension, int numF);
-	
+
 		/*
 			Automatically created but there is no usage of dynamic allocation, therefore
 			doesn't need to exist
 		**/
 		~Problem();
-		
+
 		//Getters
 		/*
 			@ return the dimension of the current problem
 		**/
 		int getDimension() const;
-	
+
 		/*
 			@ return the lower limit of the current problem
 		**/
 		double getLowerLimit()const;
-	
+
 		/*
 			@ return the upper limit of the current problem
 		**/
 		double getUpperLimit()const;
-	
+
 		/*
 			@ return the function's (problem) number
 		**/
-		double getNumFunction()const;	
-		
+		int getNumFunction()const;
+
 		//Setters
 		/*
 			Sets the problem's number:
@@ -49,7 +49,7 @@ class Problem{
 			@param numF
 		**/
 		void setNumFonction(int numF);
-		
+
 	private:
 		// problem's dimension
 		int d_dimension;

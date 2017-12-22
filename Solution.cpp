@@ -1,44 +1,38 @@
 #include "Solution.h"
+#include <cstdlib>
 #include <ctime>
 #include <cmath>
+const double pi = 3.14;
 /*
 	Constructeur à partir d'un probleme
 **/
-Solution :: Solution(const Problem& pbm) :
-	d_pCurrent{},
-	d_pBest{},
-	d_Velocity{}
+Solution :: Solution(const Problem& pbm) : d_pCurrent{}, d_pBest{}, d_Velocity{}, d_pbm{pbm}
 {
-	d_pCurrent.resize(d_pbm.dimension());
-	d_pBest.resize(d_pbm.dimension());
-	d_Velocity.resize(d_pbm.dimension());
+	d_pCurrent.resize(d_pbm.getDimension());
+	d_pBest.resize(d_pbm.getDimension());
+	d_Velocity.resize(d_pbm.getDimension());
 }
 
 /*
 	Constructeur par recopie
 **/
-Solution :: Solution fitness(const Solution& sol) : 
-	d_pCurrent{sol.get_pCurrent()}, 
-	d_pBest{sol.get_pBest()}, 
-	d_Velocity{sol.get_Velocity()}, 
-	d_currentFitness{sol.get_fitness()}, 
-	d_pbm{sol.get_problem()}
-	
+Solution :: Solution(const Solution& sol) : d_pCurrent{sol.get_pCurrent()}, d_pBest{sol.get_pBest()}, d_Velocity{sol.get_Velocity()},d_currentFitness{sol.get_currentFitness()},d_pbm{sol.get_problem()}
+
 {}
 
 // Getters
 
-vector<double>& Solution :: get_pCurrent()const
+vector<double> Solution :: get_pCurrent()const
 {
 	return d_pCurrent;
 }
 
-vector<double>& Solution :: get_pBest()const
+vector<double> Solution :: get_pBest()const
 {
 	return d_pBest;
 }
 
-vector<double>& Solution :: get_Velocity()const
+vector<double> Solution :: get_Velocity()const
 {
 	return d_Velocity;
 }
@@ -50,7 +44,7 @@ double Solution :: get_currentFitness()const
 
 double Solution :: get_BestFitness()const
 {
-	return d_bestFitness;	
+	return d_bestFitness;
 }
 
 const Problem& Solution :: get_problem() const
@@ -67,7 +61,7 @@ int Solution :: size()const
 **/
 double Solution :: randomDouble(double min, double max)
 {
-	return rand() % (max-min)+min; 
+	return (rand()/(double)RAND_MAX) * (max-min)+min;
 }
 
 /*
@@ -77,7 +71,7 @@ void Solution :: initializePosition()
 {
 	for(int i=0; i<d_pCurrent.size(); i++)
 	{
-		d_pCurrent[i]=randomDouble(d_pbm.LowerLimit(), d_pbm.UpperLimit());
+		d_pCurrent[i]=randomDouble(d_pbm.getLowerLimit(), d_pbm.getUpperLimit());
 	}
 }
 
@@ -88,7 +82,7 @@ void Solution :: initializeVelocity()
 {
 	for(int i=0; i<d_Velocity.size(); i++)
 	{
-		d_Velocity[i]=randomDouble(d_pbm.LowerLimit(), d_pbm.UpperLimit());
+		d_Velocity[i]=randomDouble(d_pbm.getLowerLimit(), d_pbm.getUpperLimit());
 	}
 }
 
@@ -97,9 +91,9 @@ void Solution :: initializeVelocity()
 **/
 void Solution ::initializeBestPosition()
 {
-	for(int i=0; i<d_pbest.size(); i++)
+	for(int i=0; i<d_pBest.size(); i++)
 	{
-		d_pbest[i]= d_pCurrent[i];	//Initialiser sa meilleure position comme étant sa position initiale
+		d_pBest[i]= d_pCurrent[i];	//Initialiser sa meilleure position comme étant sa position initiale
 	}
 
 }
@@ -119,6 +113,7 @@ void Solution :: initialize()
 double Solution :: currentFitness()
 {
 	switch(d_pbm.getNumFunction())
+	{
 		case 1: //Rosenbrock
 			for(int i=0; i<d_pCurrent.size()-1; i++)
 				d_currentFitness += 100 * pow(d_pCurrent[i+1] - pow(d_pCurrent[i],2) , 2) + pow(1-d_pCurrent[i],2);
@@ -126,23 +121,26 @@ double Solution :: currentFitness()
 		case 2: //Rastrigin
 			for(int i=0; i<d_pCurrent.size(); i++)
 				d_currentFitness += pow(d_pCurrent[i],2)- 10* cos(2*pi*d_pCurrent[i]);
-			d_currentFitness *= 10*d_p^Current.size();
+			d_currentFitness *= 10*d_pCurrent.size();
 			return d_currentFitness;
-		case 3:	//Ackley	
-			double firstMember = 0.0;
-			double secondMember = 0.0;
-			for(int i=0; i<d_pCurrent.size(); i++)
-			{
-				firstMember += pow(d_pCurrent[i],2);
-				secondMember += cos(2*pi*d_pCurrent[i]);
-			}
-			d_currentFitness = -20 * exp(-0.2*sqrt((1.0/d_pCurrent.size()*firstMember)) - exp((1.0/d_pCurrent.size())*secondMember) + 20 + exp(1);
-			return d_currentFitness;
+		case 3:	//Ackley
+		    {
+                double firstMember = 0.0;
+                double secondMember = 0.0;
+                for(int i=0; i<d_pCurrent.size(); i++)
+                {
+                    firstMember += pow(d_pCurrent[i],2);
+                    secondMember += cos(2*pi*d_pCurrent[i]);
+                }
+                d_currentFitness = -20 * exp(-0.2*sqrt((1.0/d_pCurrent.size()*firstMember)) - exp((1.0/d_pCurrent.size())*secondMember) + 20 + exp(1));
+                return d_currentFitness;
+		    }
+
 		case 4: //Schwefel
 			d_currentFitness = 418.9829* d_pCurrent.size();
 			for(int i=0; i<d_pCurrent.size(); i++)
 			{
-				d_currentFitness -= d_pCurrent[i] * sin(sqrt(fabs(d_pCurrent[i])))
+				d_currentFitness -= d_pCurrent[i] * sin(sqrt(fabs(d_pCurrent[i])));
 			}
 			return d_currentFitness;
 		case 5:	//Schaffer
@@ -160,8 +158,10 @@ double Solution :: currentFitness()
 					secondMembre+=pow(0.5,i)*cos(2*pi*pow(3,i)*0.5);
 				secondMembre*=d_pCurrent.size();
 			}
-			d_currentFitness = premierMembre - secondMembre;	
+			d_currentFitness = premierMembre - secondMembre;
 			return d_currentFitness;
+	}
+
 }
 
 /*
@@ -170,6 +170,7 @@ double Solution :: currentFitness()
 double Solution :: bestFitness()
 {
 	switch(d_pbm.getNumFunction())
+	{
 		case 1: //Rosenbrock
 			for(int i=0; i<d_pBest.size()-1; i++)
 				d_bestFitness += 100 * pow(d_pBest[i+1] - pow(d_pBest[i],2) , 2) + pow(1-d_pBest[i],2);
@@ -179,21 +180,24 @@ double Solution :: bestFitness()
 				d_currentFitness += pow(d_pBest[i],2)- 10* cos(2*pi*d_pBest[i]);
 			d_bestFitness *= 10*d_pBest.size();
 			return d_bestFitness;
-		case 3:	//Ackley	
-			double firstMember = 0.0;
-			double secondMember = 0.0;
-			for(int i=0; i<d_pBest.size(); i++)
-			{
-				firstMember += pow(d_pBest[i],2);
-				secondMember += cos(2*pi*d_pBest[i]);
-			}
-			d_bestFitness = -20 * exp(-0.2*sqrt((1.0/d_pBest.size()*firstMember)) - exp((1.0/d_pBest.size())*secondMember) + 20 + exp(1);
-			return d_bestFitness;
+		case 3:	//Ackley
+		    {
+                double firstMember = 0.0;
+                double secondMember = 0.0;
+                for(int i=0; i<d_pBest.size(); i++)
+                {
+                    firstMember += pow(d_pBest[i],2);
+                    secondMember += cos(2*pi*d_pBest[i]);
+                }
+                d_bestFitness = -20 * exp(-0.2*sqrt((1.0/d_pBest.size()*firstMember)) - exp((1.0/d_pBest.size())*secondMember) + 20 + exp(1));
+                return d_bestFitness;
+		    }
+
 		case 4: //Schwefel
 			d_currentFitness = 418.9829* d_pBest.size();
 			for(int i=0; i<d_pBest.size(); i++)
 			{
-				d_bestFitness -= d_pBest[i] * sin(sqrt(fabs(d_pBest[i])))
+				d_bestFitness -= d_pBest[i] * sin(sqrt(fabs(d_pBest[i])));
 			}
 			return d_bestFitness;
 		case 5:	//Schaffer
@@ -212,7 +216,9 @@ double Solution :: bestFitness()
 				secondMembre*=d_pBest.size();
 			}
 			d_bestFitness = premierMembre - secondMembre;
-			return d_bestFitness;	
+			return d_bestFitness;
+	}
+
 }
 
 /*
@@ -242,8 +248,18 @@ void Solution :: newVelocity(const vector<double>& gBest)
 **/
 void Solution :: updateBestPosition()
 {
-	for(int i=0; i<d_pbest.size(); i++)
+	for(int i=0; i<d_pBest.size(); i++)
 	{
-		d_pbest[i]= d_pCurrent[i];	
+		d_pBest[i]= d_pCurrent[i];
 	}
+}
+
+
+/*
+@print the fitness of particles
+**/
+void Solution :: print(std::ostream& ost)const
+{
+	ost<<"fitness courante: "<<d_currentFitness<<std::endl;
+	ost<<"Meilleure fitness: "<<d_bestFitness<<std::endl;
 }

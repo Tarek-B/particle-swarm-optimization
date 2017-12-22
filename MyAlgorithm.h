@@ -1,11 +1,13 @@
+#ifndef MYALGORITHM_H
+#define MYALGORITHM_H
+
+
 #include <iostream>
 #include <vector>
 #include "Solution.h"
 #include "Problem.h"
 #include "SetUpParams.h"
 
-#define MYALGORITHM_H
-#ifndef MYALGORITHM_H
 
 
 
@@ -13,43 +15,44 @@ class MyAlgorithm
   {
 	private:
 			//Individuals of the population
-		vector<Solution*> d_solutions;  
-			// Parameters			
-		const SetUpParams& d_setup; //c'est un objet qui contient le nbr_runs nb_evolution_steps population_size solution_size
+		vector<Solution*> d_solutions;
+			// Parameters
+		SetUpParams& d_setup; //c'est un objet qui contient le nbr_runs nb_evolution_steps population_size solution_size
 			// Upper fitness of individuals in population
-		unsigned int d_upper_cost; 
+        int d_upper_cost;
 			//The best particle of the population
- 		Solution* d_gBest ; 
+ 		Solution* d_gBest ;
+ 		Problem& d_pbm;
 	public:
-		/*
-		Constructor with a paroblem and parameters
+		/*#include "SetUpParams.h"
+		Constructor with a paroblem and paramSETUPPARAMS_Heters
 		**/
 		MyAlgorithm(const Problem& pbm,const SetUpParams& setup);
 		/*
 		Destructor
-		**/ 
-		~MyAlgorithm();	
+		**/
+		~MyAlgorithm();
 
-		friend ostream& operator<< (ostream& os, const MyAlgorithm& myAlgo);
-		friend istream& operator>> (istream& is, MyAlgorithm& myAlgo);
-		MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
-		
+		//friend std::ostream& operator<< (std::ostream& os, const MyAlgorithm& myAlgo);
+		//friend std::istream& operator>> (std::istream& is, MyAlgorithm& myAlgo);
+		//MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
+
 		//Getters
 		/*
 		@Return the parameters
 		**/
 		SetUpParams& setup() const;
-		
+
 		/*
 		@Return the particles of the population
 		**/
 		vector<Solution*>& solutions() const;
-		
+
 		/*
 		@Return the best particle of the population
 		**/
 		Solution& best_solution() const;
-		
+
 		/*
 		@Return the particle in the position'index' in the population
 		**/
@@ -69,7 +72,7 @@ class MyAlgorithm
 		@Initialize the particles of the population
 		**/
 	  	void initialize();
- 
+
 		/*
 		@creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
         **/
@@ -78,9 +81,9 @@ class MyAlgorithm
 		/*
 		@makes an evolution step
 		**/
-		void evolution(int iter); 
+		void evolution();
 
 };
-  
-  
+
+
 #endif
