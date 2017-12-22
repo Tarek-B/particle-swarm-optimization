@@ -14,7 +14,7 @@ class Problem{
 			Automatically created but there is no usage of dynamic allocation, therefore
 			doesn't need to exist
 		**/
-		~Problem();
+		//~Problem();
 
 		//Getters
 		/*

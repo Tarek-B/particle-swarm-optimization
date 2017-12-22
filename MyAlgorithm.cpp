@@ -9,36 +9,32 @@
 /*
 	Constructor
 **/
-MyAlgorithm::MyAlgorithm(Problem& pbm,SetUpParams& setup) : d_pbm{pbm},
-		 d_setup{setup},
-         d_solutions{},
-		 d_upper_cost{}
-		 
+MyAlgorithm::MyAlgorithm( Problem& pbm, SetUpParams& setup) : d_pbm{&pbm},d_setup{setup},d_solutions{},d_upper_cost{}
 {
 	for(int i=0;i<d_setup.population_size();i++)
 	{
-		d_solutions.push_back(new Solution{d_pbm});
-	}int iter;
+		d_solutions.push_back(new Solution{*d_pbm});
+	}
 }
 
 
 /*
 	Destructor
 **/
-MyAlgorithm::~MyAlgorithm()
+/*MyAlgorithm::~MyAlgorithm()
 {
 	for(int i=0;i<d_solutions.size();i++)
 	{
 	//	delete d_solution[i];
 	}
-}
+}*/
 
 /***********Focnction qui renvoie
 un pointeur vers un objet de
 paramètres de la classe SetUpParams
 *************************************/
 
-SetUpParams& MyAlgorithm::setup() const
+SetUpParams MyAlgorithm::setup() const
 {
 	return d_setup;
 }
@@ -54,7 +50,7 @@ std::vector<Solution*>& MyAlgorithm::solutions()
 /*
 @Return the best solution of the population
 **/
-Solution& MyAlgorithm :: best_solution() 
+Solution& MyAlgorithm :: best_solution()
 {
  	d_gBest = d_solutions[0] ;
  	for (int i=1 ; i<d_solutions.size() ; i++ )

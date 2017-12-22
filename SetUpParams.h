@@ -8,7 +8,7 @@ class SetUpParams{
 	public:
 		//Builder
 		SetUpParams ();
-		SetUpParams(const SetUpParams & setup) ; 
+		SetUpParams(const SetUpParams& setup) ;
 		//Destructive
 		~SetUpParams();
  		/** output Operator
@@ -50,9 +50,9 @@ class SetUpParams{
 		void population_size( int val);
 
 		void solution_size( int val);
-	
-		std::ostream& operator<< (std::ostream& os, const SetUpParams& setup)
-		std::istream& operator>> (std::istream& is, SetUpParams& setup)
+
+//		std::ostream& operator<< (std::ostream& os, const SetUpParams& setup)
+//		std::istream& operator>> (std::istream& is, SetUpParams& setup)
 
 	private:
 		 int   d_independent_runs;         //number of independent runs
