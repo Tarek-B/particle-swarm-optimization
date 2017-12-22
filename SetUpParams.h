@@ -8,6 +8,7 @@ class SetUpParams{
 	public:
 		//Builder
 		SetUpParams ();
+		SetUpParams(const SetUpParams & setup) ; 
 		//Destructive
 		~SetUpParams();
  		/** output Operator
