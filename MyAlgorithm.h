@@ -27,7 +27,7 @@ class MyAlgorithm
 		/*#include "SetUpParams.h"
 		Constructor with a paroblem and paramSETUPPARAMS_Heters
 		**/
-		MyAlgorithm(const Problem& pbm,const SetUpParams& setup);
+		MyAlgorithm(Problem& pbm,SetUpParams& setup);
 		/*
 		Destructor
 		**/
@@ -46,17 +46,17 @@ class MyAlgorithm
 		/*
 		@Return the particles of the population
 		**/
-		vector<Solution*>& solutions() const;
+		std::vector<Solution*>& solutions();
 
 		/*
 		@Return the best particle of the population
 		**/
-		Solution& best_solution() const;
+		Solution& best_solution();
 
 		/*
 		@Return the particle in the position'index' in the population
 		**/
-		Solution& solution(const unsigned int index) const; //retourne la valeur de l'index dans le tableau de solution
+		Solution& solution(int index); //retourne la valeur de l'index dans le tableau de solution
 
 		/*
 		@Return the best fitness of a particle
