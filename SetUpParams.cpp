@@ -8,6 +8,13 @@ SetUpParams::SetUpParams ():  d_independent_runs{30}, d_nb_evolution_steps{66667
 {
 
 }
+SetUpParams :: SetUpParams(const SetUpParams & setup) 
+{
+	d_independent_runs= setup.independent_runs() ; 
+	d_nb_evolution_steps= setup.nb_evolution_steps() ; 
+	d_population_size= setup.population_size() ; 
+	d_solution_size= setup.solution_size() ; 
+}	
 /** DESTRUCTEUR
 
 */
