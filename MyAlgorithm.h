@@ -15,11 +15,11 @@ class MyAlgorithm
   {
 	private:
 			//Individuals of the population
-		vector<Solution*> d_solutions;
+		vector<Solution*> d_solutions; // a changer (nom)
 			// Parameters
 		const SetUpParams& d_setup; //c'est un objet qui contient le nbr_runs nb_evolution_steps population_size solution_size
 			// Upper fitness of individuals in population
-        int d_upper_cost;
+        float d_upper_cost;
 			//The best particle of the population
  		Solution* d_gBest ;
  		Problem* d_pbm;
@@ -61,7 +61,7 @@ class MyAlgorithm
 		/*
 		@Return the best fitness of a particle
 		**/
-		unsigned int upper_cost() const; //retourne la meilleure valeur de get_fitness de solution
+		void find_gBest() ; //retourne la meilleure valeur de get_fitness de solution
 
 		/*
 		@Return the best fitness of the best particle
@@ -75,8 +75,9 @@ class MyAlgorithm
 
 		/*
 		@creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
+		!!!!! checks if the current position of the particule (any) is better than all previouses and then updates it
         **/
-		void evaluate();
+		void update_pBest();
 
 		/*
 		@makes an evolution step

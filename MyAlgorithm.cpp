@@ -11,6 +11,7 @@
 **/
 MyAlgorithm::MyAlgorithm( Problem& pbm, SetUpParams& setup) : d_pbm{&pbm},d_setup{setup},d_solutions{},d_upper_cost{}
 {
+    //création de la population
 	for(int i=0;i<d_setup.population_size();i++)
 	{
 		d_solutions.push_back(new Solution{*d_pbm});
@@ -52,14 +53,17 @@ std::vector<Solution*>& MyAlgorithm::solutions()
 **/
 Solution& MyAlgorithm :: best_solution()
 {
- 	d_gBest = d_solutions[0] ;
+ 	find_gBest();
+ 	return *d_gBest;
+
+ 	/*d_gBest = d_solutions[0] ;
  	for (int i=1 ; i<d_solutions.size() ; i++ )
  	{
  		if (d_gBest->get_currentFitness() < d_solutions[i]->get_currentFitness())
  		{
  			d_gBest = d_solutions[i] ;
 		}
-	}
+	}*/
 }
 
 /*
@@ -73,18 +77,20 @@ Solution& MyAlgorithm::solution(int index)
 /*
 @Return the best fitness of a particle
 **/
-unsigned int MyAlgorithm::upper_cost() const
-{
-  float max=std::numeric_limits<float>::min();
-  int position;
-  for(int i=0;i<d_solutions.size();i++)
+void MyAlgorithm::find_gBest()
+{   /*on modifie la fonction qui retournait la meilleure solution (valeur)
+    pour qu'elle fasse pointer gbest sur la meilleure particule*/
+  //float max=std::numeric_limits<float>::min();
+  //int position;
+  d_gBest = d_solutions[0];
+  for(int i=1;i<d_solutions.size();i++)
   {
-      if(max<d_solutions[i]->get_currentFitness())
+      if(d_gBest->get_currentFitness()<d_solutions[i]->get_currentFitness())// MINIMISATION
       {
-        max = d_solutions[i]->get_currentFitness();
-        position = i;
+        d_gBest = d_solutions[i];
+        //position = i;
       }
-	return d_solutions[position]->get_currentFitness();
+	//return d_solutions[position]->get_currentFitness();
   }
 }
 /*
@@ -96,10 +102,11 @@ void MyAlgorithm::initialize()
 	{
 		d_solutions[i]->initializePosition();
 	}
+	find_gBest();   //initialise gBest à la meilleure particule du début
 }
 
-// creates a array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
-void MyAlgorithm::evaluate()
+// creates an array with fitness of all solutions in MyAlgorithm and its position in the MyAlgorithm
+void MyAlgorithm::update_pBest()
  {
    for (int i=0 ; i<d_solutions.size(); i++)
    {
@@ -112,19 +119,17 @@ void MyAlgorithm::evaluate()
 
  void MyAlgorithm :: evolution ()
  {
- 	int j=0 ;
- 	while (j< d_setup.nb_evolution_steps())
+ 	for (int j=0;j< d_setup.nb_evolution_steps();j++)
  	{
  		for (int i=0; i<d_solutions.size(); i++)
  		{
  			d_solutions[i]->newVelocity(d_gBest->get_pCurrent()) ;
  			d_solutions[i]->newPosition() ;
- 			evaluate() ;
- 			d_gBest = &best_solution() ;
+ 			d_solutions[i]->updateBestPosition() ;
+ 			//d_gBest = &best_solution() ;
 		}
-		j++ ;
-	}
-
+    }
+    find_gBest();
  }
 
 
