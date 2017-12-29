@@ -165,7 +165,7 @@ double Solution :: currentFitness()
 }
 
 /*
-	Calculer la meilleure fitness d'une particule
+	Calculer la meilleure fitness d'une particule en fonction du vecteur des positions pBest
 **/
 double Solution :: bestFitness()
 {
@@ -248,10 +248,14 @@ void Solution :: newVelocity(const vector<double>& gBest)
 **/
 void Solution :: updateBestPosition()
 {
-	for(int i=0; i<d_pBest.size(); i++)
+    if(d_currentFitness<d_bestFitness) // comparer avant de mettre à jour   MINIMISATION
 	{
-		d_pBest[i]= d_pCurrent[i];
-	}
+	    for(int i=0; i<d_pBest.size(); i++)
+        {
+            d_pBest[i]= d_pCurrent[i];
+        }
+
+    }
 }
 
 
