@@ -85,7 +85,7 @@ void MyAlgorithm::find_gBest()
   d_gBest = d_solutions[0];
   for(int i=1;i<d_solutions.size();i++)
   {
-      if(d_gBest->get_currentFitness()<d_solutions[i]->get_currentFitness())// MINIMISATION
+      if(d_gBest->get_BestFitness()<d_solutions[i]->get_BestFitness())// MINIMISATION
       {
         d_gBest = d_solutions[i];
         //position = i;
@@ -100,7 +100,7 @@ void MyAlgorithm::initialize()
 {
 	for(int i = 0; i < d_solutions.size(); i++)
 	{
-		d_solutions[i]->initializePosition();
+		d_solutions[i]->initialize();
 	}
 	find_gBest();   //initialise gBest à la meilleure particule du début
 }
@@ -132,6 +132,15 @@ void MyAlgorithm::update_pBest()
     find_gBest();
  }
 
+ void MyAlgorithm :: print_population(std::ostream& ost)
+ {
+        for (int i=0; i<d_solutions.size(); i++)
+        {
+            ost<<"Particule "<<i<<": ";
+            ost<<std::endl;
+            d_solutions[i]->print(ost);
+        }
 
+ }
 
 

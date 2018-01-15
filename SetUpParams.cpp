@@ -84,7 +84,7 @@ int SetUpParams::solution_size() const
 
 
 */
-/*
+
 std::ostream& operator<< (std::ostream& os, const SetUpParams& setup)
 {
 	os<<"Nb of idependant Run"<< setup.independent_runs()<< std::endl;
@@ -96,9 +96,9 @@ std::ostream& operator<< (std::ostream& os, const SetUpParams& setup)
 	@param[in, out] is - le flux d'entree
 	@param[in] setup - les parametres du probleme
 	@return is - le flux d'entree
-
 */
-/*
+
+
 std::istream& operator>> (std::istream& is, SetUpParams& setup)
 {
 	int runs,
@@ -116,4 +116,4 @@ std::istream& operator>> (std::istream& is, SetUpParams& setup)
 	}
 	return is;
 }
-**/
+

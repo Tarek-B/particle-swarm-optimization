@@ -83,6 +83,7 @@ class MyAlgorithm
 		@makes an evolution step
 		**/
 		void evolution();
+        void print_population(std::ostream& ost);
 
 };
 

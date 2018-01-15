@@ -106,6 +106,8 @@ void Solution :: initialize()
 	initializePosition();
 	initializeBestPosition();
 	initializeVelocity();
+	currentFitness();
+	bestFitness();
 }
 /*
 	Calculer la fitness courante
@@ -262,8 +264,8 @@ void Solution :: updateBestPosition()
 /*
 @print the fitness of particles
 **/
-void Solution :: print(std::ostream& ost)const
+void Solution :: print(std::ostream& ost)
 {
-	ost<<"fitness courante: "<<d_currentFitness<<std::endl;
-	ost<<"Meilleure fitness: "<<d_bestFitness<<std::endl;
+	ost<<"fitness courante: "<<get_currentFitness()<<std::endl;
+	ost<<"Meilleure fitness: "<<get_BestFitness()<<std::endl;
 }

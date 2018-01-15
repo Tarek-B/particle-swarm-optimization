@@ -114,7 +114,7 @@ class Solution{
 	/*
 	@print the fitness of particles
 	**/
-	void print(std::ostream& ost)const;
+	void print(std::ostream& ost);
   private:
    		 //Vector of the coordinates of the current position
     vector<double> d_pCurrent;
