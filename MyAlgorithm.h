@@ -85,6 +85,8 @@ class MyAlgorithm
 		void evolution();
         void print_population(std::ostream& ost);
 
+		void run();
+		void execute();
 };
 
 

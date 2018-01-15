@@ -3,6 +3,7 @@
 #include "Problem.h"
 #include "SetUpParams.h"
 #include <iostream>
+
 #include <vector>
 #include <limits>
 
@@ -49,6 +50,26 @@ std::vector<Solution*>& MyAlgorithm::solutions()
 }
 
 /*
+@Return the best fitness of a particle
+**/
+void MyAlgorithm::find_gBest()
+{   /*on modifie la fonction qui retournait la meilleure solution (valeur)
+    pour qu'elle fasse pointer gbest sur la meilleure particule*/
+  //float max=std::numeric_limits<float>::min();
+  //int position;
+  d_gBest = d_solutions[0];
+  for(int i=1;i<d_solutions.size();i++)
+  {
+      if(d_gBest->get_BestFitness()<d_solutions[i]->get_BestFitness())// MINIMISATION
+      {
+        d_gBest = d_solutions[i];
+        //position = i;
+      }
+	//return d_solutions[position]->get_currentFitness();
+  }
+}
+
+/*
 @Return the best solution of the population
 **/
 Solution& MyAlgorithm :: best_solution()
@@ -74,25 +95,6 @@ Solution& MyAlgorithm::solution(int index)
 	return *d_solutions[index];
 }
 
-/*
-@Return the best fitness of a particle
-**/
-void MyAlgorithm::find_gBest()
-{   /*on modifie la fonction qui retournait la meilleure solution (valeur)
-    pour qu'elle fasse pointer gbest sur la meilleure particule*/
-  //float max=std::numeric_limits<float>::min();
-  //int position;
-  d_gBest = d_solutions[0];
-  for(int i=1;i<d_solutions.size();i++)
-  {
-      if(d_gBest->get_BestFitness()<d_solutions[i]->get_BestFitness())// MINIMISATION
-      {
-        d_gBest = d_solutions[i];
-        //position = i;
-      }
-	//return d_solutions[position]->get_currentFitness();
-  }
-}
 /*
 @Initialize all the individuals of the population
 **/
@@ -126,7 +128,8 @@ void MyAlgorithm::update_pBest()
  			d_solutions[i]->newVelocity(d_gBest->get_pCurrent()) ;
  			d_solutions[i]->newPosition() ;
  			d_solutions[i]->updateBestPosition() ;
- 			//d_gBest = &best_solution() ;
+ 			d_solutions[i]->currentFitness();
+ 			d_solutions[i]->bestFitness();
 		}
     }
     find_gBest();
@@ -143,4 +146,26 @@ void MyAlgorithm::update_pBest()
 
  }
 
+void MyAlgorithm :: run()
+{
+	initialize();
+	int i=0;
+	while(i<d_setup.nb_evolution_steps())
+	{
+		evolution();
+		cout<<"Evolution "<<i<<": "<<endl;
+		cout<<"\t Meilleure particule :"<<best_solution().bestFitness()<<endl;
+		
+	}
+}
 
+void MyAlgorithm :: execute()
+{
+	for(int i=0; i<d_setup->independent_runs(); i++)
+	{
+		cout<<"Execution "<<i<<": "<<endl;
+		run();
+	}
+
+	
+}
