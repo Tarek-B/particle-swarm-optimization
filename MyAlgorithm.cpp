@@ -60,7 +60,7 @@ void MyAlgorithm::find_gBest()
   d_gBest = d_solutions[0];
   for(int i=1;i<d_solutions.size();i++)
   {
-      if(d_gBest->get_BestFitness()<d_solutions[i]->get_BestFitness())// MINIMISATION
+      if(d_gBest->get_BestFitness()>d_solutions[i]->get_BestFitness())// MINIMISATION
       {
         d_gBest = d_solutions[i];
         //position = i;
@@ -72,10 +72,10 @@ void MyAlgorithm::find_gBest()
 /*
 @Return the best solution of the population
 **/
-Solution& MyAlgorithm :: best_solution()
-{
- 	find_gBest();
- 	return *d_gBest;
+double MyAlgorithm :: best_solution()
+{	find_gBest();
+ 	d_upper_cost=d_gBest->get_currentFitness();
+ 	return d_upper_cost;
 
  	/*d_gBest = d_solutions[0] ;
  	for (int i=1 ; i<d_solutions.size() ; i++ )
@@ -139,7 +139,7 @@ void MyAlgorithm::update_pBest()
  {
         for (int i=0; i<d_solutions.size(); i++)
         {
-            ost<<"Particule "<<i<<": ";
+            ost<<"Particule "<<i+1<<": ";
             ost<<std::endl;
             d_solutions[i]->print(ost);
         }
@@ -149,21 +149,23 @@ void MyAlgorithm::update_pBest()
 void MyAlgorithm :: run()
 {
 	initialize();
+	print_population(std::cout);
+	std::cout<<"\t Best fitness de meilleure particule :"<<best_solution()<<std::endl;
 	int i=0;
 	while(i<d_setup.nb_evolution_steps())
 	{
 		evolution();
-		cout<<"Evolution "<<i<<": "<<endl;
-		cout<<"\t Meilleure particule :"<<best_solution().bestFitness()<<endl;
-		
+		std::cout<<"Evolution "<<i+1<<": "<<std::endl;
+		std::cout<<"\t Best fitness de meilleure particule :"<<best_solution()<<std::endl;
+		i++;
 	}
 }
 
 void MyAlgorithm :: execute()
 {
-	for(int i=0; i<d_setup->independent_runs(); i++)
+	for(int i=0; i<d_setup.independent_runs(); i++)
 	{
-		cout<<"Execution "<<i<<": "<<endl;
+		std::cout<<"Execution "<<i<<": "<<std::endl;
 		run();
 	}
 

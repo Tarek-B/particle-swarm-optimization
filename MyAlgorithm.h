@@ -51,7 +51,7 @@ class MyAlgorithm
 		/*
 		@Return the best particle of the population
 		**/
-		Solution& best_solution();
+		double best_solution();
 
 		/*
 		@Return the particle in the position'index' in the population
