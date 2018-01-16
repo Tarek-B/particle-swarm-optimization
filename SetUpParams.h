@@ -51,8 +51,6 @@ class SetUpParams{
 
 		void solution_size(int val);
 
-//		std::ostream& operator<< (std::ostream& os, const SetUpParams& setup)
-//		std::istream& operator>> (std::istream& is, SetUpParams& setup)
 
 	private:
 		 int   d_independent_runs;         //number of independent runs
