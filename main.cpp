@@ -12,44 +12,46 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-
-int main(int argc, char** argv) {
-
-    // A ne pas oublier !
-    srand(time(NULL));
-
-	//Faire saisir l'utilisateur un choix
+void lancerAlgorithme()
+{
+	srand(time(NULL));
 	int choix;
-
-	do
-	{
+	do{	
+		cout<<"choix de la fonction :"<<endl;
+		cout<<" 1) Fonction Rosenbrock"<<endl;
+		cout<<" 2) Fonction Rastrigin"<<endl;
+		cout<<" 3) Fonction Ackley"<<endl;
+		cout<<" 4) Fonction Schwefel"<<endl;
+		cout<<" 5) Fonction Schaffer"<<endl;
+		cout<<" 6) Fonction Weierstrass"<<endl;
 		cout<<"Veuillez saisir votre choix: "<<endl;
 		cin>>choix;
 		cout<<endl;
-
-
-	//Créer un problem à partir du choix de l'utilisateur
+		system("cls");
+	}while(choix<=0 && choix >=7);
+	
 	SetUpParams param{};
 	Problem pbm{param.solution_size(), choix};
-	cout<<pbm.getDimension()<<" "<<pbm.getLowerLimit()<<endl;
+	MyAlgorithm algorithm{pbm, param};
+	algorithm.run();
+}
 
-    MyAlgorithm algorithm{pbm, param};
-    algorithm.initialize();
-    //cout<<"initialize marche"<<endl
-    //cout<<algorithm.solution(1).get_problem().getLowerLimit()<<"on peut acceder aux données du problème depuis la solution (i) dans le vecteur de solutions de MyAllgorythm"
-    //algorithm.find_gBest();
-    //cout<<"Fitness de gbest = "<<algorithm.best_solution().currentFitness()<<endl;
-    //algorithm.evolution();
-    //cout<<"Fitness de nouvelle gbest = "<<algorithm.best_solution().currentFitness()<<endl;
-    algorithm.print_population(cout);
-    //algorithm.evolution();
-    cout<<"\n\t=========================\t\n";
-    //algorithm.print_population(cout);
-	cout<<"Meilleure particule :";
-	cout<<endl;
-	cout<<algorithm.best_solution().get_BestFitness();
-	cout<<endl;
-	cout<<"\n\t================================================\t\n";
-}while(choix!=0);
+int main(int argc, char** argv) {
+
+	int choix = 0;
+	do
+	{
+		cout<<"1) Lancer l'algorithme "<<endl;
+		cout<<"2) Quitter "<<endl;
+		cin>>choix;
+		switch(choix)
+		{
+			case 1:
+				lancerAlgorithme();
+				break;
+			case 2:
+				break;
+		}
+	}while(choix != 2);
 	return 0;
 }
