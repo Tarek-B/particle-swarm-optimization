@@ -13,26 +13,12 @@
 
 class MyAlgorithm
   {
-	private:
-			//Individuals of the population
-		vector<Solution*> d_solutions; // a changer (nom)
-			// Parameters
-		const SetUpParams& d_setup; //c'est un objet qui contient le nbr_runs nb_evolution_steps population_size solution_size
-			// Upper fitness of individuals in population
-        float d_upper_cost;
-			//The best particle of the population
- 		Solution* d_gBest ;
- 		Problem* d_pbm;
-	public:
+		public:
 		/*#include "SetUpParams.h"
 		Constructor with a paroblem and paramSETUPPARAMS_Heters
 		**/
 		MyAlgorithm( Problem& pbm, SetUpParams& setup);
-		/*
-		Destructor
-		**/
-		//~MyAlgorithm();
-
+		
 		//friend std::ostream& operator<< (std::ostream& os, const MyAlgorithm& myAlgo);
 		//friend std::istream& operator>> (std::istream& is, MyAlgorithm& myAlgo);
 		//MyAlgorithm& operator= (const MyAlgorithm& myAlgo);
@@ -56,12 +42,12 @@ class MyAlgorithm
 		/*
 		@Return the particle in the position'index' in the population
 		**/
-		Solution& solution(int index); //retourne la valeur de l'index dans le tableau de solution
+		Solution& solution(int index);
 
 		/*
 		@Return the best fitness of a particle
 		**/
-		void find_gBest() ; //retourne la meilleure valeur de get_fitness de solution
+		void find_gBest();
 
 		/*
 		@Return the best fitness of the best particle
@@ -87,6 +73,17 @@ class MyAlgorithm
 
 		void run();
 		void execute();
+		
+		private:
+			//Individuals of the population
+		vector<Solution*> d_solutions; 
+			// Parameters
+		const SetUpParams& d_setup;
+			// Upper fitness of individuals in population
+        float d_upper_cost;
+			//The best particle of the population
+ 		Solution* d_gBest;
+ 		Problem* d_pbm;
 };
 
 

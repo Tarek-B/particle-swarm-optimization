@@ -39,17 +39,17 @@ class SetUpParams{
 		/**Modify the number of launches
 			@param[in] d_independent_runs - the number of launches
 		*/
-		void independent_runs( int val);
+		void independent_runs(int val);
 		/**Modify the number of iterations per run
 			@param[in] d_nb_evolution_steps - the number of iterations per run
 		*/
-		void nb_evolution_steps( int val);
+		void nb_evolution_steps(int val);
 		/**Modify the size of the population
 			@param[in] d_population_size - the size of the population
 		*/
-		void population_size( int val);
+		void population_size(int val);
 
-		void solution_size( int val);
+		void solution_size(int val);
 
 //		std::ostream& operator<< (std::ostream& os, const SetUpParams& setup)
 //		std::istream& operator>> (std::istream& is, SetUpParams& setup)

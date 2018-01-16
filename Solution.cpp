@@ -4,7 +4,7 @@
 #include <cmath>
 const double pi = 3.14;
 /*
-	Constructeur à partir d'un probleme
+	@Constructor from a problem
 **/
 Solution :: Solution(const Problem& pbm) : d_pCurrent{}, d_pBest{}, d_Velocity{}, d_pbm{pbm}
 {
@@ -13,59 +13,104 @@ Solution :: Solution(const Problem& pbm) : d_pCurrent{}, d_pBest{}, d_Velocity{}
 	d_Velocity.resize(d_pbm.getDimension());
 }
 
+
+
 /*
-	Constructeur par recopie
+	Constructor by recopying
 **/
 Solution :: Solution(const Solution& sol) : d_pCurrent{sol.get_pCurrent()}, d_pBest{sol.get_pBest()}, d_Velocity{sol.get_Velocity()},d_currentFitness{sol.get_currentFitness()},d_pbm{sol.get_problem()}
 
 {}
 
-// Getters
 
+
+
+// Getters
+/*
+	@return the current position
+**/
 vector<double> Solution :: get_pCurrent()const
 {
 	return d_pCurrent;
 }
 
+
+
+/*
+	@return the best postion
+**/
 vector<double> Solution :: get_pBest()const
 {
 	return d_pBest;
 }
 
+
+
+/*
+	@return the velocity
+**/
 vector<double> Solution :: get_Velocity()const
 {
 	return d_Velocity;
 }
 
+
+
+
+/*
+	@return the current fitness
+**/
 double Solution :: get_currentFitness()const
 {
 	return d_currentFitness;
 }
 
+
+
+/*
+	@return the best fitness
+**/
 double Solution :: get_BestFitness()const
 {
 	return d_bestFitness;
 }
 
+
+
+
+/*
+	@return the problem
+**/
 const Problem& Solution :: get_problem() const
 {
 	return d_pbm;
 }
 
+
+
+
+/*
+	@return the solution size
+**/
 int Solution :: size()const
 {
 	return d_pbm.getDimension();
 }
+
+
+
 /*
-	Méthode generant un reel aleatoire
+	@function that generate a random float
 **/
 double Solution :: randomDouble(double min, double max)
 {
 	return (rand()/(double)RAND_MAX) * (max-min)+min;
 }
 
+
+
 /*
-	Initialiser la position aleatoirement
+	@intialize the population randomly 
 **/
 void Solution :: initializePosition()
 {
@@ -75,8 +120,10 @@ void Solution :: initializePosition()
 	}
 }
 
+
+
 /*
-	Initialiser la vitesse aleatoirement
+	@intialize the velocity randomly
 **/
 void Solution :: initializeVelocity()
 {
@@ -86,8 +133,11 @@ void Solution :: initializeVelocity()
 	}
 }
 
+
+
+
 /*
-	Initialiser la meilleure position
+	@initialize the best position
 **/
 void Solution ::initializeBestPosition()
 {
@@ -97,6 +147,8 @@ void Solution ::initializeBestPosition()
 	}
 
 }
+
+
 
 /*
 	Initialiser une particule
@@ -109,8 +161,11 @@ void Solution :: initialize()
 	currentFitness();
 	bestFitness();
 }
+
+
+
 /*
-	Calculer la fitness courante
+	@calculate the current fitness
 **/
 double Solution :: currentFitness()
 {
@@ -166,8 +221,10 @@ double Solution :: currentFitness()
 
 }
 
+
+
 /*
-	Calculer la meilleure fitness d'une particule en fonction du vecteur des positions pBest
+	@calculate the best fitness
 **/
 double Solution :: bestFitness()
 {
@@ -223,8 +280,10 @@ double Solution :: bestFitness()
 
 }
 
+
+
 /*
-	Calculer les coordonnées de la nouvelle position
+	@calculate the new position
 **/
 void Solution :: newPosition()
 {
@@ -232,8 +291,10 @@ void Solution :: newPosition()
 		d_pCurrent[i] += d_Velocity[i];
 }
 
+
+
 /*
-	Calculer les coordonnées de la vitesse
+	Calculer the new velocity
 **/
 void Solution :: newVelocity(const vector<double>& gBest)
 {
@@ -245,8 +306,10 @@ void Solution :: newVelocity(const vector<double>& gBest)
 		d_Velocity[i] += c1*r1*(d_pBest[i]-d_pCurrent[i])+c2*r2*(gBest[i]-d_pCurrent[i]);
 }
 
+
+
 /*
-	Mettre à jour les cooordonnées de la meilleure position
+	@update the new best position
 **/
 void Solution :: updateBestPosition()
 {
@@ -261,8 +324,9 @@ void Solution :: updateBestPosition()
 }
 
 
+
 /*
-@print the fitness of particles
+	@print the fitness of particles
 **/
 void Solution :: print(std::ostream& ost)
 {

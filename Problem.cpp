@@ -1,5 +1,9 @@
 #include "Problem.h"
 
+
+/*
+	@Constructor
+**/
 Problem :: Problem(int dimension, int numF) : d_dimension{dimension} , d_numf{numF}
 {
 	switch(d_numf)
@@ -32,25 +36,51 @@ Problem :: Problem(int dimension, int numF) : d_dimension{dimension} , d_numf{nu
 
 }
 
+
+
+/*
+	@return the dimension
+**/
 int Problem :: getDimension() const
 {
 	return d_dimension;
 }
 
+
+
+/*
+	@return the lower limit
+**/
 double Problem :: getLowerLimit()const
 {
 	return d_lowerLimit;
 }
 
+
+
+/*
+	return the upper limit
+**/
 double Problem :: getUpperLimit()const
 {
 	return d_upperLimit;
 }
 
+
+
+/*
+	@ return the num of the function
+**/
 int Problem :: getNumFunction()const
 {
 	return d_numf;
 }
+
+
+
+/*
+	@affect a num to a function
+**/
 void Problem :: setNumFonction(int numF)
 {
 	d_numf = numF;
